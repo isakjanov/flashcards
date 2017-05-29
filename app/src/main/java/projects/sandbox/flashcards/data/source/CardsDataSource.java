@@ -32,7 +32,7 @@ public interface CardsDataSource {
 
     void getFlashCards(GetFlashCardsCallback callback);
 
-    void getFlashCard(GetFlashCardCallback callback);
+    void getFlashCard(int cardId, GetFlashCardCallback callback);
 
     void deleteFlashCard(DeleteFlashCardCallback callback);
 }

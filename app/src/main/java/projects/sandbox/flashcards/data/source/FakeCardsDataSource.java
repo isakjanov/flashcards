@@ -42,12 +42,15 @@ public class FakeCardsDataSource implements CardsDataSource {
 
     @Override
     public void getFlashCards(GetFlashCardsCallback callback) {
-
+        callback.onCardsLoaded(mFlashCards);
     }
 
     @Override
-    public void getFlashCard(GetFlashCardCallback callback) {
-
+    public void getFlashCard(int cardId, GetFlashCardCallback callback) {
+        if (cardId < 1 || cardId > 5) {
+            callback.onDataNotAvailable();
+        }
+        callback.onCardLoaded(mFlashCards.get(cardId - 1));
     }
 
     @Override
