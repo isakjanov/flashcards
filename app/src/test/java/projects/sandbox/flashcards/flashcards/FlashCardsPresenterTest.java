@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
+import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -15,6 +16,7 @@ import projects.sandbox.flashcards.data.FlashCard;
 import projects.sandbox.flashcards.data.source.CardsDataSource;
 
 import static junit.framework.Assert.assertEquals;
+import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -73,7 +75,11 @@ public class FlashCardsPresenterTest {
         verify(mDataSource).getFlashCards(mLoadCardsCallbackCaptor.capture());
         mLoadCardsCallbackCaptor.getValue().onCardsLoaded(CARDS);
 
-        //Add checks that preloader is being showed
+        // Check progress indicator is shown
+        InOrder inOrder = inOrder(mFragment);
+        inOrder.verify(mFragment).showPreloader(true);
+        // Check progress indicator is hidden and all tasks are shown in UI
+        inOrder.verify(mFragment).showPreloader(false);
 
         ArgumentCaptor<List> showCardsArgumentCaptor = ArgumentCaptor.forClass(List.class);
         verify(mFragment).showCards(showCardsArgumentCaptor.capture());

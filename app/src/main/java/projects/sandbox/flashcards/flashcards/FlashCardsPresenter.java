@@ -28,14 +28,17 @@ public class FlashCardsPresenter implements FlashCardsContract.Presenter {
 
     @Override
     public void loadCards() {
+        mCardsView.showPreloader(true);
         mDataSource.getFlashCards(new CardsDataSource.GetFlashCardsCallback() {
             @Override
             public void onCardsLoaded(List<FlashCard> flashCards) {
+                mCardsView.showPreloader(false);
                 mCardsView.showCards(flashCards);
             }
 
             @Override
             public void onDataNotAvailable() {
+                mCardsView.showPreloader(false);
                 mCardsView.showError();
             }
         });
