@@ -28,8 +28,6 @@ public class FlashCardsFragment extends Fragment implements FlashCardsContract.V
 
     private RecyclerView mCardsListView;
 
-    private List<FlashCard> mFlashCards = new ArrayList<>();
-
     public static FlashCardsFragment getInstance() {
         return new FlashCardsFragment();
     }
@@ -37,7 +35,7 @@ public class FlashCardsFragment extends Fragment implements FlashCardsContract.V
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mAdapter = new CardsListAdapter(mFlashCards);
+        mAdapter = new CardsListAdapter(new ArrayList<FlashCard>());
     }
 
     @Override
@@ -63,8 +61,7 @@ public class FlashCardsFragment extends Fragment implements FlashCardsContract.V
 
     @Override
     public void showCards(List<FlashCard> cards) {
-        mFlashCards.clear();
-        mFlashCards.addAll(cards);
+        mAdapter.setCards(cards);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -88,6 +85,10 @@ public class FlashCardsFragment extends Fragment implements FlashCardsContract.V
         private List<FlashCard> mCards;
 
         public CardsListAdapter(List<FlashCard> cards) {
+            mCards = cards;
+        }
+
+        public void setCards(List<FlashCard> cards) {
             mCards = cards;
         }
 
