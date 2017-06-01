@@ -57,4 +57,14 @@ public class FakeCardsDataSource implements CardsDataSource {
     public void deleteFlashCard(DeleteFlashCardCallback callback) {
 
     }
+
+    @Override
+    public void deleteAllCards() {
+
+    }
+
+    @Override
+    public void saveFlashCard(FlashCard card) {
+
+    }
 }
