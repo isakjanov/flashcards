@@ -21,10 +21,14 @@ public interface FlashCardsContract {
         void showEmptyList();
 
         void showError();
+
+        void showAddNewCard();
     }
 
     interface Presenter extends BasePresenter {
 
         void loadCards();
+
+        void addNewCard();
     }
 }

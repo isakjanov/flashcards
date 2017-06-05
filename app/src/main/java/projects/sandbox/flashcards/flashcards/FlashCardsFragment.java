@@ -1,7 +1,9 @@
 package projects.sandbox.flashcards.flashcards;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,19 +16,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import projects.sandbox.flashcards.R;
+import projects.sandbox.flashcards.addeditflashcard.AddEditActivity;
 import projects.sandbox.flashcards.data.FlashCard;
 
 /**
  * Created on 5/29/17.
  */
 
-public class FlashCardsFragment extends Fragment implements FlashCardsContract.View {
+public class FlashCardsFragment extends Fragment implements FlashCardsContract.View, View.OnClickListener {
 
     private FlashCardsContract.Presenter mPresenter;
 
     private CardsListAdapter mAdapter;
 
     private RecyclerView mCardsListView;
+
+    private FloatingActionButton fab;
 
     public static FlashCardsFragment getInstance() {
         return new FlashCardsFragment();
@@ -56,7 +61,17 @@ public class FlashCardsFragment extends Fragment implements FlashCardsContract.V
         mCardsListView = (RecyclerView) root.findViewById(R.id.cards_list);
         mCardsListView.setAdapter(mAdapter);
         mCardsListView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        fab.setOnClickListener(this);
         return root;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.fab) {
+            mPresenter.addNewCard();
+        }
     }
 
     @Override
@@ -78,6 +93,12 @@ public class FlashCardsFragment extends Fragment implements FlashCardsContract.V
     @Override
     public void showError() {
 
+    }
+
+    @Override
+    public void showAddNewCard() {
+        Intent intent = new Intent(getActivity(), AddEditActivity.class);
+        startActivityForResult(intent, AddEditActivity.ADD_CARD_REQ_CODE);
     }
 
     private class CardsListAdapter extends RecyclerView.Adapter<CardsListViewHolder> {

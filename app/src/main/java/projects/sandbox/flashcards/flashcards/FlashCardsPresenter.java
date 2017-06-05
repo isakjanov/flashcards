@@ -43,4 +43,9 @@ public class FlashCardsPresenter implements FlashCardsContract.Presenter {
             }
         });
     }
+
+    @Override
+    public void addNewCard() {
+        mCardsView.showAddNewCard();
+    }
 }
