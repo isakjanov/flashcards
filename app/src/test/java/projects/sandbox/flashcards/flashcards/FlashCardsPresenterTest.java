@@ -17,6 +17,7 @@ import projects.sandbox.flashcards.data.source.CardsDataSource;
 
 import static junit.framework.Assert.assertEquals;
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -94,5 +95,11 @@ public class FlashCardsPresenterTest {
 
         // Check error message is shown
         verify(mFragment).showError();
+    }
+
+    @Test
+    public void addFlashCard() {
+        mPresenter.addNewCard();
+        verify(mFragment, times(1)).showAddNewCard();
     }
 }
