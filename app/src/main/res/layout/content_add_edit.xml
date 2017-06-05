@@ -8,4 +8,6 @@
     tools:context="projects.sandbox.flashcards.addeditflashcard.AddEditActivity"
     tools:showIn="@layout/activity_add_edit">
 
+
+
 </android.support.constraint.ConstraintLayout>

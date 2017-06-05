@@ -2,12 +2,12 @@ package projects.sandbox.flashcards.addeditflashcard;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import projects.sandbox.flashcards.R;
+import projects.sandbox.flashcards.data.source.local.CardsLocalDataSource;
 
 public class AddEditActivity extends AppCompatActivity {
 
@@ -22,14 +22,21 @@ public class AddEditActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        AddEditCardFragment addEditCardFragment = (AddEditCardFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.contentFrame);
+        if (addEditCardFragment == null) {
+            addEditCardFragment = AddEditCardFragment.getInstance();
+            FragmentManager manager = getSupportFragmentManager();
+            manager.beginTransaction()
+                    .add(R.id.contentFrame, addEditCardFragment)
+                    .commit();
+        }
+
+        AddEditCardPresenter presenter = new AddEditCardPresenter(null, addEditCardFragment,
+                CardsLocalDataSource.getInstance(this));
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
     @Override
