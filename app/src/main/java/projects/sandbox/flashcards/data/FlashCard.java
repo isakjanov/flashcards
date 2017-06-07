@@ -5,7 +5,7 @@ package projects.sandbox.flashcards.data;
  */
 public final class FlashCard {
 
-    private int mId;
+    private Integer mId;
 
     private final String mTerm;
 
@@ -35,7 +35,7 @@ public final class FlashCard {
         mDescription = description;
     }
 
-    public int getId() {
+    public Integer getId() {
         return mId;
     }
 
