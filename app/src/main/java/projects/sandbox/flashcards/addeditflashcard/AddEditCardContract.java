@@ -15,6 +15,8 @@ public interface AddEditCardContract {
 
         void setDescription();
 
+        void showTermValidationError();
+
         void closeScreen();
     }
 

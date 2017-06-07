@@ -67,4 +67,9 @@ public class FakeCardsDataSource implements CardsDataSource {
     public void saveFlashCard(FlashCard card) {
 
     }
+
+    @Override
+    public void destroy() {
+
+    }
 }

@@ -1,5 +1,6 @@
 package projects.sandbox.flashcards.addeditflashcard;
 
+import projects.sandbox.flashcards.data.FlashCard;
 import projects.sandbox.flashcards.data.source.CardsDataSource;
 
 /**
@@ -31,7 +32,13 @@ public class AddEditCardPresenter implements AddEditCardContract.Presenter {
 
     @Override
     public void saveCard(String term, String description) {
-
+        if (isDataValid(term, description)) {
+            FlashCard card = new FlashCard(term, description);
+            mDataSource.saveFlashCard(card);
+            mView.closeScreen();
+        } else {
+            mView.showTermValidationError();
+        }
     }
 
     @Override
@@ -41,5 +48,12 @@ public class AddEditCardPresenter implements AddEditCardContract.Presenter {
 
     private boolean isNewCard() {
         return mCardId == null;
+    }
+
+    private boolean isDataValid(String term, String description) {
+        if (term.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 }

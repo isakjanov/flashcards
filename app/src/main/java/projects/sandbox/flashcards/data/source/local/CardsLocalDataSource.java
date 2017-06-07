@@ -25,6 +25,7 @@ public class CardsLocalDataSource implements CardsDataSource{
 
     private CardsLocalDataSource(Context context) {
         mDbHelper = new FlashCardsDBHelper(context.getApplicationContext());
+        openDB();
     }
 
     public static CardsLocalDataSource getInstance(Context context) {
@@ -121,11 +122,16 @@ public class CardsLocalDataSource implements CardsDataSource{
         mDb.insert(FlashCardsContract.FlashCardsEntry.TABLE_NAME, null, values);
     }
 
-    public void openDB() {
+    @Override
+    public void destroy() {
+        closeDB();
+    }
+
+    private void openDB() {
         mDb = mDbHelper.getWritableDatabase();
     }
 
-    public void closeDB() {
+    private void closeDB() {
         if (mDb != null) {
             mDb.close();
         }

@@ -1,7 +1,9 @@
 package projects.sandbox.flashcards.addeditflashcard;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,8 @@ import projects.sandbox.flashcards.R;
  * Created on 6/5/17.
  */
 
-public class AddEditCardFragment extends Fragment implements AddEditCardContract.View {
+public class AddEditCardFragment extends Fragment
+        implements AddEditCardContract.View, View.OnClickListener {
 
     private static AddEditCardFragment mInstance;
 
@@ -23,6 +26,8 @@ public class AddEditCardFragment extends Fragment implements AddEditCardContract
     private EditText mTermView;
 
     private EditText mDescriptionView;
+
+    private FloatingActionButton mFab;
 
     public static AddEditCardFragment getInstance() {
         if (mInstance == null) {
@@ -43,12 +48,21 @@ public class AddEditCardFragment extends Fragment implements AddEditCardContract
         View root = inflater.inflate(R.layout.fragment_add_edit, container, false);
         mTermView = (EditText) root.findViewById(R.id.term);
         mDescriptionView = (EditText) root.findViewById(R.id.description);
+        mFab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        mFab.setOnClickListener(this);
         return root;
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.fab) {
+            mPresenter.saveCard(mTermView.getText().toString(), mDescriptionView.getText().toString());
+        }
     }
 
     @Override
@@ -68,6 +82,12 @@ public class AddEditCardFragment extends Fragment implements AddEditCardContract
 
     @Override
     public void closeScreen() {
+        getActivity().setResult(Activity.RESULT_OK);
+        getActivity().finish();
+    }
+
+    @Override
+    public void showTermValidationError() {
 
     }
 }

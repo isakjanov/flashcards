@@ -15,7 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import projects.sandbox.flashcards.R;
-import projects.sandbox.flashcards.data.source.FakeCardsDataSource;
+import projects.sandbox.flashcards.data.source.local.CardsLocalDataSource;
 
 public class FlashCardsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,7 +58,7 @@ public class FlashCardsActivity extends AppCompatActivity
             transaction.commit();
         }
 
-        mPresenter = new FlashCardsPresenter(FakeCardsDataSource.getInstance(), fragment);
+        mPresenter = new FlashCardsPresenter(CardsLocalDataSource.getInstance(this), fragment);
     }
 
     @Override

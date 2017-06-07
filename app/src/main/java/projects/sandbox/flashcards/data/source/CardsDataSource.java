@@ -39,4 +39,6 @@ public interface CardsDataSource {
     void deleteFlashCard(DeleteFlashCardCallback callback);
 
     void saveFlashCard(FlashCard card);
+
+    void destroy();
 }
