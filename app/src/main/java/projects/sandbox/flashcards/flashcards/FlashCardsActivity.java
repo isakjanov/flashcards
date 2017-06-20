@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import projects.sandbox.flashcards.R;
+import projects.sandbox.flashcards.data.source.CardsLoader;
 import projects.sandbox.flashcards.data.source.local.CardsLocalDataSource;
 
 public class FlashCardsActivity extends AppCompatActivity
@@ -58,7 +59,9 @@ public class FlashCardsActivity extends AppCompatActivity
             transaction.commit();
         }
 
-        mPresenter = new FlashCardsPresenter(CardsLocalDataSource.getInstance(this), fragment);
+        CardsLoader loader = new CardsLoader(this, CardsLocalDataSource.getInstance(this));
+        mPresenter = new FlashCardsPresenter(CardsLocalDataSource.getInstance(this), loader,
+                getSupportLoaderManager(), fragment);
     }
 
     @Override

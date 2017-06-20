@@ -36,10 +36,9 @@ public class CardsLocalDataSource implements CardsDataSource{
     }
 
     @Override
-    public void getFlashCards(GetFlashCardsCallback callback) {
+    public List<FlashCard> getFlashCards() {
         if (!mDb.isOpen()) {
-            callback.onDataNotAvailable();
-            return;
+            return null;
         }
 
         List<FlashCard> cards = new ArrayList<>();
@@ -66,11 +65,7 @@ public class CardsLocalDataSource implements CardsDataSource{
             }
         }
 
-        if (cards.size() > 0) {
-            callback.onCardsLoaded(cards);
-        } else {
-            callback.onDataNotAvailable();
-        }
+        return cards;
     }
 
     @Override

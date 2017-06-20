@@ -30,7 +30,7 @@ public interface CardsDataSource {
         void onFailedToDeleteCard();
     }
 
-    void getFlashCards(GetFlashCardsCallback callback);
+    List<FlashCard> getFlashCards();
 
     void getFlashCard(int cardId, GetFlashCardCallback callback);
 
