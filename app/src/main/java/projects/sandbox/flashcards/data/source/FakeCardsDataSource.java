@@ -41,8 +41,8 @@ public class FakeCardsDataSource implements CardsDataSource {
     }
 
     @Override
-    public void getFlashCards(GetFlashCardsCallback callback) {
-        callback.onCardsLoaded(mFlashCards);
+    public List<FlashCard> getFlashCards() {
+        return mFlashCards;
     }
 
     @Override
