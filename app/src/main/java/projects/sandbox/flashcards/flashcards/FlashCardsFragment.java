@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class FlashCardsFragment extends Fragment implements FlashCardsContract.V
     private RecyclerView mCardsListView;
 
     private FloatingActionButton fab;
+
+    private ProgressBar mProgressBar;
 
     public static FlashCardsFragment getInstance() {
         return new FlashCardsFragment();
@@ -64,6 +67,8 @@ public class FlashCardsFragment extends Fragment implements FlashCardsContract.V
 
         fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(this);
+
+        mProgressBar = (ProgressBar) root.findViewById(R.id.progressBar);
         return root;
     }
 
@@ -82,7 +87,11 @@ public class FlashCardsFragment extends Fragment implements FlashCardsContract.V
 
     @Override
     public void showPreloader(boolean active) {
-
+        if (active) {
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.GONE);
+        }
     }
 
     @Override
